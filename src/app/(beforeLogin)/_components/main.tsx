@@ -1,12 +1,19 @@
 import Image from 'next/image';
-import styles from '@/app/page.module.css';
 import logo from '../../../../public/logo.png';
 import Link from 'next/link';
+import { Box, Button, Stack, Typography } from '@mui/material';
 
 export default function Main() {
   return (
-    <div className={styles.container}>
-      <div className={styles.left}>
+    <Stack
+      sx={{
+        width: '100dvw',
+        height: '100dvh',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      direction={'row'}>
+      <Box>
         <Image
           src={logo}
           alt='logo'
@@ -16,22 +23,18 @@ export default function Main() {
             objectFit: 'contain',
           }}
         />
-      </div>
-      <div className={styles.right}>
-        <h1>{`What's happening?`}</h1>
-        <h2>Sign up now</h2>
-        <Link
-          href='/i/flow/signup'
-          className={styles.signup}>
-          Sign up
+      </Box>
+      <Stack spacing={2}>
+        <Typography variant='h3'>{`What's happening?`}</Typography>
+        <Typography variant='h4'>Sign up now</Typography>
+        <Link href='/i/flow/signup'>
+          <Button variant='contained'>Sign up</Button>
         </Link>
-        <h3>Already have an account?</h3>
-        <Link
-          href='/login'
-          className={styles.login}>
-          Login
+        <Typography variant='h5'>Already have an account?</Typography>
+        <Link href='/login'>
+          <Button variant='contained'>Login</Button>
         </Link>
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
-import style from '@/app/(beforeLogin)/_components/login.module.css';
-import { useRouter } from 'next/navigation';
+import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { styled } from '@mui/system';
 
 export default function LoginModal() {
   const [id, setId] = useState();
@@ -16,11 +16,18 @@ export default function LoginModal() {
   const onChangePassword = () => {};
 
   return (
-    <div className={style.modalBackground}>
-      <div className={style.modal}>
-        <div className={style.modalHeader}>
-          <button
-            className={style.closeButton}
+    <Wrapper>
+      <Modal>
+        <Stack
+          sx={{
+            padding: '36px 80px 20px',
+            fontSize: '31px',
+            fontWeight: 'bold',
+          }}
+          direction={'row'}
+          spacing={2}>
+          <Button
+            variant='text'
             onClick={onClickClose}>
             <svg
               width={24}
@@ -31,57 +38,87 @@ export default function LoginModal() {
                 <path d='M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z'></path>
               </g>
             </svg>
-          </button>
-          <div
-            style={{
-              color: 'black',
-            }}>
+          </Button>
+          <Typography
+            variant='h3'
+            fontWeight={'bold'}
+            color={'black'}>
             로그인하세요.
-          </div>
-        </div>
-        <form onSubmit={onSubmit}>
-          <div className={style.modalBody}>
-            <div className={style.inputDiv}>
-              <label
-                className={style.inputLabel}
-                htmlFor='id'>
-                아이디
-              </label>
-              <input
-                id='id'
-                className={style.input}
-                value={id}
-                onChange={onChangeId}
-                type='text'
-                placeholder=''
-              />
-            </div>
-            <div className={style.inputDiv}>
-              <label
-                className={style.inputLabel}
-                htmlFor='password'>
-                비밀번호
-              </label>
-              <input
-                id='password'
-                className={style.input}
-                value={password}
-                onChange={onChangePassword}
-                type='password'
-                placeholder=''
-              />
-            </div>
-          </div>
-          <div className={style.message}>{message}</div>
-          <div className={style.modalFooter}>
-            <button
-              className={style.actionButton}
+          </Typography>
+        </Stack>
+        <form
+          onSubmit={onSubmit}
+          style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '0px 50px',
+          }}>
+          <Stack
+            sx={{
+              width: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            spacing={2}>
+            <TextField
+              sx={{
+                width: '400px',
+              }}
+              value={id}
+              onChange={onChangeId}
+              type='text'
+            />
+            <TextField
+              sx={{
+                width: '400px',
+              }}
+              value={password}
+              onChange={onChangePassword}
+              type='password'
+            />
+          </Stack>
+          <Box>{message}</Box>
+          <Box
+            sx={{
+              margin: '24px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Button
+              variant='contained'
               disabled={!id && !password}>
               로그인하기
-            </button>
-          </div>
+            </Button>
+          </Box>
         </form>
-      </div>
-    </div>
+      </Modal>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled('div')({
+  width: '100vw',
+  height: '100%',
+  justifyContent: 'center',
+  position: 'absolute',
+  backgroundColor: 'rgba(0,0,0,0.4)',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+});
+
+const Modal = styled('div')({
+  background: '#ffffff',
+  position: 'relative',
+  top: '5%',
+  maxWidth: '80vw',
+  borderRadius: '16px',
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '20px',
+  width: '40vw',
+  margin: '50px auto',
+});

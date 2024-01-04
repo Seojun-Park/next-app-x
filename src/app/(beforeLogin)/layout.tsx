@@ -1,5 +1,5 @@
+import { Box } from '@mui/material';
 import { ReactNode } from 'react';
-import styles from '@/app/page.module.css';
 
 type BeforeLoginLayoutType = {
   children: ReactNode;
@@ -7,9 +7,15 @@ type BeforeLoginLayoutType = {
 };
 export default function Layout({ children, modal }: BeforeLoginLayoutType) {
   return (
-    <div className={styles.container}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100dvw',
+        height: '100dvh',
+      }}>
       {children}
       {modal}
-    </div>
+    </Box>
   );
 }
